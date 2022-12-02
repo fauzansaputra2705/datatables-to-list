@@ -108,11 +108,11 @@
             paramsAjax(s, d);
             executeAjax(formatAjaxParams);
           }
+        } else {
+          scope
+            .find(attributes.container)
+            .after("<span id='loading'>Loading ...</span>");
         }
-
-        scope
-          .find(attributes.container)
-          .after("<span id='loading'>Loading ...</span>");
       } else {
         scope.find("#loading").remove();
       }
