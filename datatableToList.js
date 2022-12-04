@@ -36,6 +36,7 @@
     var _draw1 = 1;
     var _draw2 = 0;
     var recordsTotal = 0;
+    var recordsFiltered = 0;
     var countDataRender = 0;
     var postData = {};
 
@@ -96,6 +97,7 @@
         render(response);
         _draw2 = response.draw;
         recordsTotal = response.recordsTotal;
+        recordsFiltered = response.recordsFiltered;
         countDataRender = response.data.length + countDataRender;
       };
       formatAjaxParams.error = function (jqXHR, textStatus, errorThrown) {
@@ -108,7 +110,7 @@
       $.ajax(params);
     }
 
-    $.fn.reload = function () {
+    this.reload = function () {
       $.ajax(formatAjaxParams);
     };
 
@@ -128,7 +130,10 @@
 
           s = attributes.length + start;
           d = _draw1 + 1;
-          if (countDataRender < recordsTotal) {
+          if (
+            countDataRender < recordsFiltered &&
+            countDataRender < recordsTotal
+          ) {
             clearTimeout($.data(this, "scrollTimer"));
             $.data(
               this,
@@ -140,8 +145,10 @@
             );
           }
         }
-
-        if (countDataRender < recordsTotal) {
+        if (
+          countDataRender < recordsFiltered &&
+          countDataRender < recordsTotal
+        ) {
           scope
             .find(attributes.container)
             .after(
