@@ -10,14 +10,12 @@ var listDatatable = $('.data-list').DataTableToList({
         search: true,
         container: '.list',
         ajax: {
-            "url" : "{{ route('guru.pengajuan_bantuan.data_index') }}",
+            "url" : ,
             "dataType" : 'json',
-            'type' : 'POST',
+            'type' : '',
             'data' : {
-            _token : '{{ csrf_token() }}',
-            tahun :  $('#tahun_mobile').val(),
-            kategori_bantuan : $('#kategori_bantuan_mobile').val(),
-        }
+               
+            }
         },
         columns: [
                 //columns datatable
@@ -36,9 +34,7 @@ var listDatatable = $('.data-list').DataTableToList({
     });
 
 //filter
-$('#cari-filter-mobile').click(function () {
-    listDatatable.filter({
-        name :  val,
-    });
-});
+ listDatatable.filter({
+     name :  val,
+ });
 ```
